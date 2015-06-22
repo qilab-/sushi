@@ -20,4 +20,6 @@ local.properties
 .settings/
 .loadpath
 .factorypath
+.classpath
+.project
 
