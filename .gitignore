@@ -6,20 +6,3 @@
 /project/plugins.sbt
 /target/
 
-### Eclipse ###
-*.pydevproject
-.metadata
-.gradle
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.factorypath
-.classpath
-.project
-
