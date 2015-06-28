@@ -13,10 +13,10 @@ package object largenumbers {
 
   @tailrec
   def pow(coefficient: BigInt, base: BigInt, exp: BigInt): BigInt = {
-    if (exp isValidInt)
+    if (exp.isValidInt)
       coefficient * base.pow(exp.toInt)
     else {
-      val (c: BigInt, b, e) = if (exp isOdd) (base, base, exp - 1) else (1, base * base, exp >> 1)
+      val (c: BigInt, b, e) = if (exp.isOdd) (base, base, exp - 1) else (1, base * base, exp >> 1)
       pow(coefficient * c, b, e)
     }
   }
