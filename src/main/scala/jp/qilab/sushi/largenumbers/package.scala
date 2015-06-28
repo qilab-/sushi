@@ -5,6 +5,8 @@ import scala.annotation.tailrec
 
 package object largenumbers {
 
+  def halfOf(x: BigInt): BigInt = x >> 1
+
   def pow(base: BigInt, exp: BigInt): BigInt = {
     pow(1, base, exp)
   }

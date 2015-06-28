@@ -5,6 +5,24 @@ import org.scalatest.{FunSpec, Matchers}
 class packageSpec extends FunSpec with Matchers {
 
   describe("package") {
+    describe("halfOf(x)") {
+      it("returns half of x if x is even.") {
+        for (i <- -10 to 10 by 2)
+          halfOf(i) should equal (i / 2)
+
+        val v = BigInt(123456789) * BigInt(12345)
+        halfOf(v * 2) should equal (v)
+      }
+
+      it("returns half of (x - 1) if x is odd.") {
+        for (i <- -11 to 11 by 2)
+          halfOf(i) should equal ((i - 1) / 2)
+
+        val v = BigInt(123456789) * BigInt(12345)
+        halfOf(v * 2 + 1) should equal (v)
+      }
+    }
+
     describe("pow(base, exp)") {
       it("throws ArithmeticException if exp is negative.") {
         intercept[ArithmeticException] {
@@ -20,7 +38,7 @@ class packageSpec extends FunSpec with Matchers {
         // base = 0
         pow(BigInt(0), BigInt(1)) should equal (BigInt(0))
         pow(BigInt(0), BigInt(2)) should equal (BigInt(0))
-        pow(BigInt(0), BigInt(2)) should equal (BigInt(0))
+        pow(BigInt(0), BigInt(3)) should equal (BigInt(0))
         // base = 1
         pow(BigInt(1), BigInt(0)) should equal (BigInt(1))
         pow(BigInt(1), BigInt(1)) should equal (BigInt(1))
