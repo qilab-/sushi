@@ -5,9 +5,9 @@ dependencies:
     - ~/.sbt
 
   override:
-    - "./activator update"
+    - sbt update
 
 test:
   override:
-    - "./activator clean test"
+    - sbt clean test
 
