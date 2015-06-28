@@ -1,6 +1,7 @@
 package jp.qilab.sushi.largenumbers
 
 import jp.qilab.sushi.runtime.RichBigInt
+import scala.language.implicitConversions
 
 object Implicits {
 
