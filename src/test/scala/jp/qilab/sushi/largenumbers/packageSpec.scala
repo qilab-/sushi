@@ -66,6 +66,22 @@ class packageSpec extends FunSpec with Matchers {
 
     describe("tetration(base, height)") {
       it("returns tetration.") {
+        // base == 0
+        tetration(0, -1) should equal(BigInt(0))
+        tetration(0, 0) should equal(BigInt(1))
+        tetration(0, 1) should equal(BigInt(0))
+        tetration(0, 2) should equal(BigInt(1))
+        tetration(0, 3) should equal(BigInt(0))
+        tetration(0, 4) should equal(BigInt(1))
+        // height == -1, then return 0
+        for (i <- 1 to 9)
+          tetration(i, -1) should equal (BigInt(0))
+        // height == 0, then return 1
+        for (i <- 1 to 9)
+          tetration(i, 0) should equal (BigInt(1))
+        // height == 1, then return base
+        for (i <- 1 to 9)
+          tetration(i, 1) should equal (BigInt(i))
         // height == 2
         tetration(1, 2) should equal (BigInt(1))
         tetration(2, 2) should equal (BigInt(4))

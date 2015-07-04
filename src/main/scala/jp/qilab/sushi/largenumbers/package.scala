@@ -16,7 +16,7 @@ package object largenumbers {
     if (exp.isValidInt)
       coefficient * base.pow(exp.toInt)
     else {
-      val (c: BigInt, b, e) = if (exp.isOdd) (base, base, exp - 1) else (1, base * base, exp >> 1)
+      val (c: BigInt, b, e) = if (exp.isOdd) (base, base, exp - 1) else (1, base * base, halfOf(exp))
       pow(coefficient * c, b, e)
     }
   }
@@ -24,21 +24,20 @@ package object largenumbers {
   @tailrec
   def powRec(base: BigInt, exp: BigInt, n: Int): BigInt = {
     require(n > 0)
-    if (n == 1) base
-    else if (n == 2) pow(base, exp)
-    else powRec(base, pow(base, exp), n - 1)
+    n match {
+      case 1 => base
+      case 2 => pow(base, exp)
+      case _ => powRec(base, pow(base, exp), n - 1)
+    }
   }
 
   def tetration(base: Int, height: Int): BigInt = {
     require(base >= 0 || height >= -1)
-    if (base == 0) {
-      (height + 1) % 2
-    } else if (height == 0) {
-      1
-    } else if (height == -1) {
-      0
-    } else {
-      powRec(base, base, height)
+    (base, height) match {
+      case (0, h)  => (h + 1) % 2
+      case (_, -1) => 0
+      case (_, 0)  => 1
+      case (b, h)  => powRec(b, b, h)
     }
   }
 
