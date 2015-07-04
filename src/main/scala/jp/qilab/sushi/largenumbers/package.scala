@@ -32,7 +32,7 @@ package object largenumbers {
   }
 
   def tetration(base: Int, height: Int): BigInt = {
-    require(base >= 0 || height >= -1)
+    require(base >= 0 && height >= -1)
     (base, height) match {
       case (0, h)  => (h + 1) % 2
       case (_, -1) => 0
@@ -40,5 +40,41 @@ package object largenumbers {
       case (b, h)  => powRec(b, b, h)
     }
   }
+
+  def hyper0(base: Int, exp: Int): BigInt = {
+    require(base >= 0 && exp >= 0)
+    exp + 1
+  }
+
+  def hyper1(base: Int, exp: Int): BigInt = {
+    require(base >= 0 && exp >= 0)
+    base + exp
+  }
+
+  def hyper2(base: Int, exp: Int): BigInt = {
+    require(base >= 0 && exp >= 0)
+    base * exp
+  }
+
+  def hyper3(base: Int, exp: Int): BigInt = {
+    require(base >= 0 && exp >= 0)
+    pow(base, exp)
+  }
+
+  def hyper4(base: Int, exp: Int):BigInt = {
+    require(base >= 0 && exp >= 0)
+    tetration(base, exp)
+  }
+
+//  @tailrec
+//  def hyper(rank: Int)(base: Int, exp: Int): Int = {
+//    (rank, base, exp) match {
+//      case (0, _, e) => e + 1
+//      case (1, b, 0) => b
+//      case (2, _, 0) => 0
+//      case (_, _, 0) => 1
+//      case (r, b, e) => hyper(r - 1)(b, hyper(r)(b, e - 1))
+//    }
+//  }
 
 }

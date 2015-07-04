@@ -30,7 +30,7 @@ class packageSpec extends FunSpec with Matchers {
         }
       }
 
-      it("returns 1 if base == 0 and exp == 0") {
+      it("returns 1 if base == 0 and exp == 0.") {
         pow(BigInt(0), BigInt(0)) should equal (BigInt(1))
       }
 
@@ -57,7 +57,7 @@ class packageSpec extends FunSpec with Matchers {
     }
 
     describe("pow(coefficient, base, exp)") {
-      it("returns coefficient times pow(base, exp)") {
+      it("returns coefficient times pow(base, exp).") {
         val c = BigInt(123456789) * BigInt(12345)
         val b = BigInt(Int.MaxValue) + BigInt(2)
         pow(c, b, 3) should equal (c * b * b * b)
@@ -65,6 +65,17 @@ class packageSpec extends FunSpec with Matchers {
     }
 
     describe("tetration(base, height)") {
+      describe("if base < 0 or height < -1") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            tetration(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            tetration(1, -2)
+          }
+        }
+      }
+
       it("returns tetration.") {
         // base == 0
         tetration(0, -1) should equal(BigInt(0))
@@ -100,6 +111,116 @@ class packageSpec extends FunSpec with Matchers {
         // height == 4
         tetration(1, 4) should equal (BigInt(1))
         tetration(2, 4) should equal (BigInt(65536))
+      }
+    }
+
+    describe("hyper0(base, exp)") {
+      describe("if base < 0 or exp < 0") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            hyper0(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            hyper0(1, -1)
+          }
+        }
+      }
+
+      it("returns increment of exp.") {
+        for {
+          i <- 0 to 9
+          j <- 0 to 9
+        } {
+          hyper0(i, j) should equal (BigInt(j + 1))
+        }
+      }
+    }
+
+    describe("hyper1(base, exp)") {
+      describe("if base < 0 or exp < 0") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            hyper1(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            hyper1(1, -1)
+          }
+        }
+      }
+
+      it("returns addition.") {
+        for {
+          i <- 0 to 9
+          j <- 0 to 9
+        } {
+          hyper1(i, j) should equal (BigInt(i + j))
+        }
+      }
+    }
+
+    describe("hyper2(base, exp)") {
+      describe("if base < 0 or exp < 0") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            hyper2(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            hyper2(1, -1)
+          }
+        }
+      }
+
+      it("returns multiplication.") {
+        for {
+          i <- 0 to 9
+          j <- 0 to 9
+        } {
+          hyper2(i, j) should equal (BigInt(i * j))
+        }
+      }
+    }
+
+    describe("hyper3(base, exp)") {
+      describe("if base < 0 or exp < 0") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            hyper3(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            hyper3(1, -1)
+          }
+        }
+      }
+
+      it("returns exponentiation.") {
+        for {
+          i <- 0 to 9
+          j <- 0 to 9
+        } {
+          hyper3(i, j) should equal (pow(i, j))
+        }
+      }
+    }
+
+    describe("hyper4(base, exp)") {
+      describe("if base < 0 or exp < 0") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            hyper4(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            hyper4(1, -1)
+          }
+        }
+      }
+
+      it("returns tetration.") {
+        for {
+          i <- 0 to 3
+          j <- 0 to 3
+        } {
+          hyper4(i, j) should equal (tetration(i, j))
+        }
       }
     }
   }
