@@ -22,7 +22,7 @@ package object largenumbers {
   }
 
   @tailrec
-  def powRec(base: BigInt, exp: BigInt, n: Int): BigInt = {
+  private[this] def powRec(base: BigInt, exp: BigInt, n: Int): BigInt = {
     require(n > 0)
     n match {
       case 1 => base
