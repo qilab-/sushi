@@ -31,6 +31,15 @@ package object largenumbers {
     }
   }
 
+  @tailrec
+  private[this] def powRec(base: BigInt, exp: BigInt, n: BigInt): BigInt = {
+    require(n > 0)
+    if (n.isValidInt)
+      powRec(base, exp, n.toInt)
+    else
+      powRec(base, pow(base, exp), n - 1)
+  }
+
   def tetration(base: Int, height: Int): BigInt = {
     require(base >= 0 && height >= -1)
     (base, height) match {
@@ -38,6 +47,38 @@ package object largenumbers {
       case (_, -1) => 0
       case (_, 0)  => 1
       case (b, h)  => powRec(b, b, h)
+    }
+  }
+
+  private[this] def tetration(base: BigInt, height: BigInt): BigInt = {
+    require(base >= 0 && height >= -1)
+    (base, height) match {
+      case (b, h) if b.isValidInt && h.isValidInt => tetration(b.toInt, h.toInt)
+      case (b, h) if b == 0  => (h + 1) % 2
+      case (_, h) if h == -1 => 0
+      case (_, h) if h == 0  => 1
+      case (b, h)            => powRec(b, b, h)
+    }
+  }
+
+  @tailrec
+  private[this] def tetRec(base: BigInt, height: BigInt, n: Int): BigInt = {
+    require(n > 0)
+    n match {
+      case 1 => base
+      case 2 => tetration(base, height)
+      case _ => tetRec(base, tetration(base, height), n - 1)
+    }
+  }
+
+  def pentation(base: Int, exp: Int): BigInt = {
+    require(base >= 0 && exp >= -1)
+    (base, exp) match {
+      case (0, e)  => (e + 1) % 2
+      case (_, -1) => 0
+      case (_, 0)  => 1
+      case (1, _)  => 1
+      case (b, e)  => tetRec(b, b, e)
     }
   }
 

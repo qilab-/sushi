@@ -114,6 +114,46 @@ class packageSpec extends FunSpec with Matchers {
       }
     }
 
+    describe("pentation(base, exp)") {
+      describe("if base < 0 or exp < -1") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            pentation(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            pentation(1, -2)
+          }
+        }
+      }
+      it("returns pentation.") {
+        // base == 0
+        pentation(0, -1) should equal(BigInt(0))
+        pentation(0, 0) should equal(BigInt(1))
+        pentation(0, 1) should equal(BigInt(0))
+        pentation(0, 2) should equal(BigInt(1))
+        pentation(0, 3) should equal(BigInt(0))
+        pentation(0, 4) should equal(BigInt(1))
+        // exp == -1, then return 0
+        for (i <- 1 to 9)
+          pentation(i, -1) should equal (BigInt(0))
+        // exp == 0, then return 1
+        for (i <- 1 to 9)
+          pentation(i, 0) should equal (BigInt(1))
+        // exp == 1, then return base
+        for (i <- 1 to 9)
+          pentation(i, 1) should equal (BigInt(i))
+        // exp == 2
+        pentation(1, 2) should equal (BigInt(1))
+        pentation(2, 2) should equal (BigInt(4))
+        pentation(3, 2) should equal (BigInt(7625597484987L))
+        // height == 3
+        pentation(1, 3) should equal (BigInt(1))
+        pentation(2, 3) should equal (BigInt(65536))
+        // height == 4
+        pentation(1, 4) should equal (BigInt(1))
+      }
+    }
+
     describe("hyper0(base, exp)") {
       describe("if base < 0 or exp < 0") {
         it("throws IllegalArgumentException.") {
