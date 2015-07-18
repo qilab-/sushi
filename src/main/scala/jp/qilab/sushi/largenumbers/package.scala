@@ -112,15 +112,15 @@ package object largenumbers {
     pentation(base, exp)
   }
 
-//  @tailrec
-//  def hyper(rank: Int)(base: Int, exp: Int): Int = {
-//    (rank, base, exp) match {
-//      case (0, _, e) => e + 1
-//      case (1, b, 0) => b
-//      case (2, _, 0) => 0
-//      case (_, _, 0) => 1
-//      case (r, b, e) => hyper(r - 1)(b, hyper(r)(b, e - 1))
-//    }
-//  }
+  // TODO @tailrec: Is it possible?
+  def hyper(rank: Int)(base: Int, exp: Int): Int = {
+    (rank, base, exp) match {
+      case (0, _, e) => e + 1
+      case (1, b, 0) => b
+      case (2, _, 0) => 0
+      case (_, _, 0) => 1
+      case (r, b, e) => hyper(r - 1)(b, hyper(r)(b, e - 1))
+    }
+  }
 
 }
