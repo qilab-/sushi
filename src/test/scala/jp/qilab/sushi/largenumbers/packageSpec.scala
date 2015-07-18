@@ -264,5 +264,27 @@ class packageSpec extends FunSpec with Matchers {
         }
       }
     }
+
+    describe("hyper5(base, exp)") {
+      describe("if base < 0 or exp < 0") {
+        it("throws IllegalArgumentException.") {
+          intercept[IllegalArgumentException] {
+            hyper5(-1, 1)
+          }
+          intercept[IllegalArgumentException] {
+            hyper5(1, -1)
+          }
+        }
+      }
+
+      it("returns pentation.") {
+        for {
+          i <- 0 to 2
+          j <- 0 to 3
+        } {
+          hyper5(i, j) should equal (pentation(i, j))
+        }
+      }
+    }
   }
 }

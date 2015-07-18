@@ -102,9 +102,14 @@ package object largenumbers {
     pow(base, exp)
   }
 
-  def hyper4(base: Int, exp: Int):BigInt = {
+  def hyper4(base: Int, exp: Int): BigInt = {
     require(base >= 0 && exp >= 0)
     tetration(base, exp)
+  }
+
+  def hyper5(base: Int, exp: Int): BigInt = {
+    require(base >= 0 && exp >= 0)
+    pentation(base, exp)
   }
 
 //  @tailrec
