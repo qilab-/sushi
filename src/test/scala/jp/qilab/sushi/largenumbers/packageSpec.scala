@@ -125,6 +125,7 @@ class packageSpec extends FunSpec with Matchers {
           }
         }
       }
+
       it("returns pentation.") {
         // base == 0
         pentation(0, -1) should equal(BigInt(0))

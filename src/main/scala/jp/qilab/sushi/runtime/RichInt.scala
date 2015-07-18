@@ -18,4 +18,6 @@ final class RichInt(val self: Int) {
 
   def ^^(exp: Int): BigInt = tetration(self, exp)
 
+  def ^^^(exp: Int): BigInt = pentation(self, exp)
+
 }
